@@ -2,7 +2,7 @@
 /**
  *
  */
-
+namespace forteroche\model;
 class Manager
 {
 
