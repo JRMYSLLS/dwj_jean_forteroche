@@ -1,6 +1,7 @@
 <?php
 
 require_once('controller/ChapterController.php');
+require_once('controller/memberControler.php');
 
 $action='';
 
@@ -14,7 +15,11 @@ switch ($action) {
     break;
 
   case 'viewChapter':
+    showChapter();
+    break;
 
+  case 'login':
+    registration();
     break;
 
   default:
