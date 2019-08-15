@@ -9,20 +9,27 @@ if(isset($_GET['action'])){
   $action = $_GET['action'];
 };
 
-switch ($action) {
-  case 'chapter':
-    listChapter();
-    break;
+try {
+  switch ($action) {
+    case 'chapter':
+      listChapter();
+      break;
 
-  case 'viewChapter':
-    showChapter();
-    break;
+    case 'viewChapter':
+      showChapter();
+      break;
 
-  case 'login':
-    registration();
-    break;
+    case 'login':
+      registration();
+      break;
 
-  default:
-    listChapter();
-    break;
+    case 'registration':
+      addMember();
+
+    default:
+      listChapter();
+      break;
+  }
+} catch (\Exception $e) {
+  echo 'Erreur : ' . $e->getMessage();
 }

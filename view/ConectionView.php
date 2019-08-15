@@ -33,8 +33,11 @@
         <label for="password2">Votre mot de passe</label>
         <input type="password" id="password2" class="form-control" name="password">
       </div>
-      <input type="submit" name="" value="Inscription">
+      <input type="submit" name="inscription" value="Inscription">
     </form>
+    <?php if (isset($erreur)) {
+      echo $erreur;
+    } ?>
   </div>
 </div>
 
