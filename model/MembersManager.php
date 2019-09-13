@@ -6,15 +6,23 @@ require_once('model/Manager.php');
  *
  */
 
-class Members extends Manager
+class MembersManager extends Manager
 {
 
-  public function registration($functionMember,$pseudo,$mail,$password){
+  public function registration($pseudo,$mail,$password){
     $db = $this->dbconnect();
-    $req = $db->prepare('INSERT INTO members(id_function,pseudo,mail,password) VALUES(?,?,?,?)');
-    $affectedline = $req->execute(array($functionMember,$pseudo,$mail,$password));
+    $req = $db->prepare('INSERT INTO members(pseudo,mail,password) VALUES(?,?,?)');
+    $affectedline = $req->execute(array($pseudo,$mail,$password));
 
     return $affectedline;
   }
 
+  public function isRegistred($mail){
+    $db = $this->dbconnect();
+    $req = $db->prepare('SELECT * FROM members WHERE mail=?');
+    $req->execute(array($mail));
+    $result = $req->rowCount();
+
+    return $result;
+  }
 }

@@ -4,6 +4,8 @@ require_once('controller/ChapterController.php');
 require_once('controller/memberControler.php');
 
 $action='';
+$membre = new \forteroche\controller\Members();
+$chapter = new \forteroche\controller\ChapterController();
 
 if(isset($_GET['action'])){
   $action = $_GET['action'];
@@ -12,22 +14,22 @@ if(isset($_GET['action'])){
 try {
   switch ($action) {
     case 'chapter':
-      listChapter();
+      $chapter->listChapter();
       break;
 
     case 'viewChapter':
-      showChapter();
+      $chapter->showChapter();
       break;
 
     case 'login':
-      registration();
+      require('view/ConectionView.php');
       break;
 
     case 'registration':
-      addMember();
-
+      $membre->addMember();
+      break;
     default:
-      listChapter();
+      $chapter->listChapter();
       break;
   }
 } catch (\Exception $e) {

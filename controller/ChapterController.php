@@ -1,18 +1,25 @@
 <?php
+
+namespace forteroche\controller;
+use \forteroche\model\ChapterManager;
+
 require_once('model/ChapterManager.php');
 
-function listChapter(){
-  $chapter = new \forteroche\model\ChapterManager();
-  $results = $chapter->getChapters();
-  require('view/accueil.php');
-}
+class ChapterController{
 
-function showChapter(){
-$chapter = new \forteroche\model\ChapterManager();
+  function listChapter(){
+    $chapter = new ChapterManager();
+    $results = $chapter->getChapters();
+    require('view/accueil.php');
+  }
 
-if (isset($_GET['id']) && $_GET['id']>0) {
-  $results = $chapter->getChapter($_GET['id']);
-}
-require('view/ChapterView.php');
+  function showChapter(){
+  $chapter = new ChapterManager();
 
+  if (isset($_GET['id']) && $_GET['id']>0) {
+    $results = $chapter->getChapter($_GET['id']);
+  }
+  require('view/ChapterView.php');
+
+  }
 }
