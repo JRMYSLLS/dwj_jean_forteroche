@@ -19,9 +19,18 @@ class MembersManager extends Manager
 
   public function isRegistred($mail){
     $db = $this->dbconnect();
-    $req = $db->prepare('SELECT * FROM members WHERE mail=?');
+    $req = $db->prepare('SELECT mail FROM members WHERE mail=?');
     $req->execute(array($mail));
     $result = $req->rowCount();
+
+    return $result;
+  }
+
+  public function connection($mail){
+    $db = $this->dbconnect();
+    $req = $db->prepare('SELECT * FROM members WHERE mail=?');
+    $req->execute(array($mail));
+    $result = $req->fetch();
 
     return $result;
   }

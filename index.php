@@ -1,10 +1,12 @@
 <?php
+session_start();
+
 
 require_once('controller/ChapterController.php');
-require_once('controller/memberControler.php');
+require_once('controller/MemberController.php');
 
 $action='';
-$membre = new \forteroche\controller\Members();
+$membre = new \forteroche\controller\MembersController();
 $chapter = new \forteroche\controller\ChapterController();
 
 if(isset($_GET['action'])){
@@ -28,6 +30,15 @@ try {
     case 'registration':
       $membre->addMember();
       break;
+
+    case 'connection':
+      $membre->connect();
+      break;
+
+      case 'disconnection':
+        $membre->disconnection();
+        break;
+
     default:
       $chapter->listChapter();
       break;
@@ -35,3 +46,6 @@ try {
 } catch (\Exception $e) {
   echo 'Erreur : ' . $e->getMessage();
 }
+// mettre antislash pour class native PHP devant
+
+//autoload??
