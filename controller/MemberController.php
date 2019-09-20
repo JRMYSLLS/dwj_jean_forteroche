@@ -63,7 +63,6 @@ class MembersController
     $_SESSION = array();
     session_destroy();
 
-// Suppression des cookies de connexion automatique
     setcookie('id', '');
     setcookie('pseudo', '');
     header('Location: index.php');
@@ -72,47 +71,4 @@ class MembersController
 
 }
 
-/*
-___________ AVANT PASSAGE EN OBJET______________!!!
-
-
-
-function addMember(){
-  $newMember = new Members();
-  if (isset($_POST['inscription'])) {
-    if (!empty($_POST['pseudo']) && !empty($_POST['mail']) && !empty($_POST['password'])) {
-      $pseudo = htmlspecialchars($_POST['pseudo']);
-      $mail = htmlspecialchars($_POST['mail']);
-      $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-      if (filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-        $verif = $newMember->isRegistred($mail);
-        if ($verif == 0) {
-          $result = $newMember->registration($pseudo,$mail,$password);
-        }
-        else {
-          throw new \Exception('adresse mail deja utilisé!!!');
-        }
-      }
-      else {
-        throw new \Exception('adresse mail non valide!!!');
-      }
-    }
-    else {
-      throw new \Exception('tout les champs doivent etre remplie!!!');
-    }
-  }
-
-}
-
-function connect(){
-  $connectUser = new Members();
-  if (isset($_POST['connection'])) {
-    if (!empty($_POST['mail']) &&!empty($_POST['password'])) {
-      $pseudo = htmlspecialchars($_POST['pseudo']);
-      $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    }
-  }
-}
-
-trim pour virer les espaces
-*/
+//trim pour virer les espaces

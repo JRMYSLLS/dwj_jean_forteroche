@@ -4,10 +4,12 @@ session_start();
 
 require_once('controller/ChapterController.php');
 require_once('controller/MemberController.php');
+require_once('controller/CommentController.php');
 
 $action='';
 $membre = new \forteroche\controller\MembersController();
 $chapter = new \forteroche\controller\ChapterController();
+$comment = new \forteroche\controller\CommentController();
 
 if(isset($_GET['action'])){
   $action = $_GET['action'];
@@ -21,6 +23,7 @@ try {
 
     case 'viewChapter':
       $chapter->showChapter();
+      $comment->showComments();
       break;
 
     case 'login':
@@ -35,9 +38,13 @@ try {
       $membre->connect();
       break;
 
-      case 'disconnection':
-        $membre->disconnection();
-        break;
+    case 'disconnection':
+      $membre->disconnection();
+      break;
+
+    case 'comment':
+      $comment->postComment();
+      break;
 
     default:
       $chapter->listChapter();
