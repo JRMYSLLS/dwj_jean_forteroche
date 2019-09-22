@@ -23,7 +23,6 @@ try {
 
     case 'viewChapter':
       $chapter->showChapter();
-      $comment->showComments();
       break;
 
     case 'login':

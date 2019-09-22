@@ -13,10 +13,13 @@ class MembersController
   public function addMember(){
     $newMember = new MembersManager();
     if (isset($_POST['inscription'])) {
-      if (!empty($_POST['pseudo']) && !empty($_POST['mail']) && !empty($_POST['password'])) {
-        $pseudo = htmlspecialchars($_POST['pseudo']);
-        $mail = htmlspecialchars($_POST['mail']);
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+      $tPseudo = trim($_POST['pseudo']);
+      $tMail = trim($_POST['mail']);
+      $tPassword = trim($_POST['password']);
+      if (!empty($tPseudo) && !empty($tMail) && !empty($tPassword)) {
+        $pseudo = htmlspecialchars($tPseudo);
+        $mail = htmlspecialchars($tMail);
+        $password = password_hash($tMail, PASSWORD_DEFAULT);
         if (filter_var($mail, FILTER_VALIDATE_EMAIL)) {
           $verif = $newMember->isRegistred($mail);
           if ($verif == 0) {
@@ -35,6 +38,7 @@ class MembersController
       }
     }
   }
+
   public function connect(){
     $connectUser = new MembersManager();
     if (isset($_POST['connection'])) {
