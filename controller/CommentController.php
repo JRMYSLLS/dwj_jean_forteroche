@@ -35,4 +35,14 @@ class CommentController
     }
   //  require('view/ChapterView.php');
   }
+
+  public function reportComment(){
+    $report = new CommentManager();
+    if (isset($_GET['id']) && $_GET['id']>0) {
+      $chapter = $_GET['chapter'];
+      $valideReport = $report->reportComment($_GET['id']);
+      header('Location: index.php?action=viewChapter&id='.$chapter);
+    }
+
+  }
 }

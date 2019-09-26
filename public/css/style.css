@@ -1,23 +1,75 @@
-.inscription{
-  width: 50%;
+
+.jumbo-custom{
+margin: auto;
+background-color: #f8f9fa;
+transition: all 0.5s ease-out;
 }
 
-.connection{
-  width: 50%;
-}
-
-.form{
-  display: flex;
-  justify-content: center;
-  margin-top: 100px;
-}
-
-.form-group{
+.form-custom{
+  background-color: #f8f9fa;
+  border: 10px solid #f8f9fa;
+  border-radius: 10px;
+  width: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 100px;
 }
 
 .chapter-custom{
-  margin-top: 50px;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  margin: 10px;
+  padding: 15px;
+}
+.nav-custom{
+  height: 10vh;
+  width: 100%;
+  z-index: 2;
+  position: sticky;
+  top: 0;
+  background-color: #f8f9fa;
+}
+
+
+.jc:hover{
+  background-color: #cfdbe7;
+}
+
+.prout{
+  height: 90vh;
+  background-color: #f8f9fa;
+}
+.custom{
+  height: 100%;
+}
+
+.back_end{
+  background-color: #24292e;
+  color: #f8f9fa;
+}
+
+.comment_barre{
+  background-color: #f8f9fa;
+}
+
+.commentaires_custom{
+  width: 50%;
+}
+
+.nav-admin{
+  height: 10vh;
+  width: 100%;
+  z-index: 2;
+  position: sticky;
+  top: 0;
+  background-color: #1a2530;
+
+}
+
+.nav-admin div ul li a{
+  color: white !important;
 }

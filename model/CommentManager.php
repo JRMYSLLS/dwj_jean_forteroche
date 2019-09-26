@@ -26,6 +26,16 @@
 
      return $comments;
    }
+
+   public function reportComment($validate){
+     $db = $this->dbconnect();
+     $req = $db->prepare('UPDATE comments
+                          SET validate_comment = 1
+                          WHERE id=?');
+    $result = $req->execute(array($validate));
+
+      return $result;
+   }
 /*
    public function deleteComment($id){
 

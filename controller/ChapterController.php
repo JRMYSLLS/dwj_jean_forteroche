@@ -8,13 +8,13 @@ require_once('model/CommentManager.php');
 
 class ChapterController{
 
-  function listChapter(){
+  public function listChapter(){
     $chapter = new \forteroche\model\ChapterManager();
     $results = $chapter->getChapters();
     require('view/accueil.php');
   }
 
-  function showChapter(){
+  public function showChapter(){
   $chapter = new \forteroche\model\ChapterManager();
   $comment = new \forteroche\model\CommentManager();
   $num = $_GET['id'];
@@ -23,6 +23,7 @@ class ChapterController{
     $results = $chapter->getChapter($num);
     $comments = $comment->getComment($num);
   }
+
 
   require('view/ChapterView.php');
 

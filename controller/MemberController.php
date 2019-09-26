@@ -19,11 +19,12 @@ class MembersController
       if (!empty($tPseudo) && !empty($tMail) && !empty($tPassword)) {
         $pseudo = htmlspecialchars($tPseudo);
         $mail = htmlspecialchars($tMail);
-        $password = password_hash($tMail, PASSWORD_DEFAULT);
+        $password = password_hash($tPassword, PASSWORD_DEFAULT);
         if (filter_var($mail, FILTER_VALIDATE_EMAIL)) {
           $verif = $newMember->isRegistred($mail);
           if ($verif == 0) {
             $result = $newMember->registration($pseudo,$mail,$password);
+            header('location: index.php');
           }
           else {
             throw new \Exception('adresse mail deja utilisé!!!');
@@ -50,8 +51,13 @@ class MembersController
         $passwordMatch = password_verify($password, $verify['password']);
         if($passwordMatch){
           $_SESSION['pseudo'] = $verify['pseudo'];
-          $_SESSION['id'] = $verify['id'];
-          header('Location: index.php');
+          $_SESSION['id'] = $verify['is_admin'];
+          if($verify['is_admin']==0){
+            header('Location: index.php?action=admin');
+          }
+          else{
+            header('Location: index.php');
+          }
         }
         else{
           throw new \Exception('mauvais mail ou mot de passe!!!');

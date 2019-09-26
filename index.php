@@ -45,6 +45,14 @@ try {
       $comment->postComment();
       break;
 
+    case 'admin':
+      require('view/admin.php');
+      break;
+
+    case 'reportComment':
+      $comment->reportComment();
+        break;
+
     default:
       $chapter->listChapter();
       break;
