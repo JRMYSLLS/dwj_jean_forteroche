@@ -5,11 +5,13 @@ session_start();
 require_once('controller/ChapterController.php');
 require_once('controller/MemberController.php');
 require_once('controller/CommentController.php');
+require_once('controller/AdminController.php');
 
 $action='';
 $membre = new \forteroche\controller\MembersController();
 $chapter = new \forteroche\controller\ChapterController();
 $comment = new \forteroche\controller\CommentController();
+$admin = new \forteroche\controller\AdminController();
 
 if(isset($_GET['action'])){
   $action = $_GET['action'];
@@ -26,7 +28,7 @@ try {
       break;
 
     case 'login':
-      require('view/ConectionView.php');
+      $membre->connectionView();
       break;
 
     case 'registration':
@@ -46,12 +48,20 @@ try {
       break;
 
     case 'admin':
-      require('view/admin.php');
+      $admin->adminPage();
       break;
 
     case 'reportComment':
       $comment->reportComment();
         break;
+
+    case 'deleteComment':
+      $comment->deleteComment();
+      break;
+
+    case 'validateComment':
+      $comment->validateComment();
+      break;
 
     default:
       $chapter->listChapter();
@@ -63,3 +73,5 @@ try {
 // mettre antislash pour class native PHP devant
 
 //autoload??
+
+// status si flag dans la BDD

@@ -17,7 +17,6 @@ class CommentController
       $comment = htmlspecialchars($_POST['comment']);
       if (!empty($comment)) {
         $chapter->postComment($id_chapter,$author,$comment);
-      //  require('view/ChapterView.php');
         header('Location: index.php?action=viewChapter&id='.$id_chapter);
       }
       else {
@@ -38,11 +37,29 @@ class CommentController
 
   public function reportComment(){
     $report = new CommentManager();
-    if (isset($_GET['id']) && $_GET['id']>0) {
-      $chapter = $_GET['chapter'];
+    if (isset($_GET['id']) && $_GET['id']>0 && isset($_GET['chapter'])) {
+      //$chapter = $_GET['chapter'];
       $valideReport = $report->reportComment($_GET['id']);
-      header('Location: index.php?action=viewChapter&id='.$chapter);
+      header('Location: index.php?action=viewChapter&id='.$_GET['chapter']);
+    }else{
+      echo 'prout';
     }
 
+  }
+
+  public function deleteComment(){
+    $delete = new CommentManager();
+    if(isset($_GET['id'])){
+      $delete->deleteComment($_GET['id']);
+      header('Location: index.php?action=admin');
+    }
+  }
+
+  public function validateComment(){
+    $validate = new CommentManager();
+    if(isset($_GET['id'])){
+      $validate->validateComment($_GET['id']);
+      header('Location: index.php?action=admin');
+    }
   }
 }

@@ -10,29 +10,36 @@
     <title><?= $title ?></title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light nav-custom">
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="index.php?action=chapter">Accueil<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.php?action=contact">Contact</a>
-          </li>
 
-          <?php if (isset($_SESSION['pseudo'])) {?>
-             <li class="nav-item">
-               <a class="nav-link" href="index.php?action=disconnection">déconnexion</a>
-             </li>
-          <?php }else{?>
+      <nav class="navbar navbar-expand-lg navbar-light <?php if ($_SESSION['admin']){?> nav-admin<?php }else{?> nav-custom<?php } ?>">
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.php?action=login">Connexion/Inscription</a>
+              <a class="nav-link" href="index.php?action=chapter">Accueil<span class="sr-only">(current)</span></a>
             </li>
-          <?php } ?>
-        </ul>
-      </div>
+            <?php if (isset($_SESSION['admin']) && $_SESSION['admin']){?>
+              <li class="nav-item">
+                <a class="nav-link" href="index.php?action=admin">Espace Administrateur</a>
+              </li>
+            <?php }else{?>
+            <li class="nav-item">
+              <a class="nav-link" href="index.php?action=contact">Contact</a>
+            </li>
+            <?php } ?>
+            <?php if (isset($_SESSION['pseudo'])) {?>
+               <li class="nav-item">
+                 <a class="nav-link" href="index.php?action=disconnection">déconnexion</a>
+               </li>
+            <?php }else{?>
+              <li class="nav-item">
+                <a class="nav-link" href="index.php?action=login">Connexion/Inscription</a>
+              </li>
+            <?php } ?>
 
-    </nav>
+          </ul>
+        </div>
+
+      </nav>
 
     <?= $content ?>
   </body>
