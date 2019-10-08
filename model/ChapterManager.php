@@ -28,4 +28,13 @@ class ChapterManager extends Manager
     $results = $req->fetch();
     return $results;
   }
+
+  function newChapter($title,$chapter)
+  {
+  $db = $this->dbconnect();
+  $req = $db->prepare('INSERT INTO chapter(title,content,creation_date) VALUES(?,?,NOW())');
+  $affectedline = $req->execute(array($title,$chapter));
+
+  return $affectedline;
+  }
 }
