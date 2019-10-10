@@ -56,6 +56,14 @@
      return $result;
    }
 
+   public function deleteCommentInChapter($id){
+     $db = $this->dbconnect();
+     $req = $db->prepare('DELETE FROM comments where id_chapter=?');
+     $result = $req->execute(array($id));
+
+     return $result;
+   }
+
    public function validateComment($validate){
      $db = $this->dbconnect();
      $req = $db->prepare('UPDATE comments

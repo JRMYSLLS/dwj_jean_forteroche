@@ -37,4 +37,24 @@ class ChapterManager extends Manager
 
   return $affectedline;
   }
+
+  function deleteChapter($id)
+  {
+    $db = $this->dbconnect();
+    $req = $db->prepare('DELETE FROM chapter WHERE id=?');
+    $affectedline = $req->execute(array($id));
+
+    return $affectedline;
+  }
+
+  function editChapter($id,$content,$title)
+  {
+    $db = $this->dbconnect();
+    $req = $db->prepare('UPDATE chapter
+                         SET content=?, title=?
+                         WHERE id=?');
+   $result = $req->execute(array($id,$content,$title));
+
+   return $result;
+  }
 }

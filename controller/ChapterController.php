@@ -19,9 +19,9 @@ class ChapterController extends Connect
   public function showChapter(){
   $chapter = new \forteroche\model\ChapterManager();
   $comment = new \forteroche\model\CommentManager();
-  $num = $_GET['id'];
 
   if (isset($_GET['id']) && $_GET['id']>0) {
+    $num = $_GET['id'];
     $results = $chapter->getChapter($num);
     $comments = $comment->getComment($num);
   }
@@ -31,6 +31,43 @@ class ChapterController extends Connect
   public function newChapterView(){
     $isAdmin = $this->isAdmin();
     require('view/backend/newChapterView.php');
+  }
+
+  public function editListChapter(){
+    $isAdmin = $this->isAdmin();
+    $chapter = new \forteroche\model\ChapterManager();
+    $results = $chapter->getChapters();
+    require('view/backend/editListChapter.php');
+  }
+
+  public function editChapterView(){
+    $isAdmin = $this->isAdmin();
+    $chapter = new \forteroche\model\ChapterManager();
+    if(isset($_GET['id']) && $_GET['id']>0){
+      $results = $chapter->getChapter($_GET['id']);
+      require('view/backend/editChapterView.php');
+    }
+  }
+
+  public function editChapter(){
+    $chapter = new \forteroche\model\ChapterManager();
+    if(isset($_GET['id']) && $_GET['id']>0){
+      $id = $_GET['id'];
+      $content = html_entity_decode(htmlspecialchars($_POST['content']));
+      $title = htmlspecialchars($_POST['title']);
+      $result = $chapter->editChapter($id,$content,$title);
+    }
+  }
+
+  public function deleteChapter(){
+    $chapter = new \forteroche\model\ChapterManager();
+    $comment = new \forteroche\model\CommentManager();
+    if(isset($_GET['id']) && $_GET['id']>0){
+      $id = $_GET['id'];
+      $chapter->deleteChapter($id);
+      $comment->deleteComment($id);
+    }
+
   }
 
   public function newChapter(){
@@ -50,10 +87,3 @@ class ChapterController extends Connect
     }
   }
 }
-
-
-
-
-
-//message flash PHP
-//controller parents

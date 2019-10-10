@@ -63,12 +63,31 @@ try {
       $comment->validateComment();
       break;
 
+    case 'newchapter':
+      $chapter->newchapterView();
+      break;
+
+    case 'publishChapter':
+      $chapter->newChapter();
+      break;
+
+    case 'editListChapter':
+      $chapter->editListChapter();
+      break;
+
+    case 'editChapter':
+      $chapter->editChapterView();
+      break;
+
+    case 'deleteChapter':
+      $chapter->deleteChapter();
+
     default:
       $chapter->listChapter();
       break;
   }
 } catch (\Exception $e) {
-  echo 'Erreur : ' . $e->getMessage();
+  require('view/erreur.php');
 }
 // mettre antislash pour class native PHP devant
 
