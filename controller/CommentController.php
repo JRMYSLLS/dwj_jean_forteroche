@@ -11,6 +11,7 @@ class CommentController
 {
   public function postComment(){
     $chapter = new CommentManager();
+    $flash = new \forteroche\controller\MessageFlash();
     if(isset($_POST['commentPost'])){
       $id_chapter = htmlspecialchars($_GET['id']);
       $author = $_SESSION['pseudo'];
@@ -20,8 +21,8 @@ class CommentController
         header('Location: index.php?action=viewChapter&id='.$id_chapter);
       }
       else {
-        throw new \Exception("votre commentaire est vide");
-
+        $flash->setFlash('votre commentaire est vide');
+        header('Location: index.php?action=viewChapter&id='.$_GET['id']);
       }
     }
   }
@@ -32,19 +33,14 @@ class CommentController
     if (isset($_GET['id']) && $_GET['id']>0) {
       $comments = $chapter->getComment($_GET['id']);
     }
-  //  require('view/ChapterView.php');
   }
 
   public function reportComment(){
     $report = new CommentManager();
     if (isset($_GET['id']) && $_GET['id']>0 && isset($_GET['chapter'])) {
-      //$chapter = $_GET['chapter'];
       $valideReport = $report->reportComment($_GET['id']);
       header('Location: index.php?action=viewChapter&id='.$_GET['chapter']);
-    }else{
-      echo 'prout';
     }
-
   }
 
   public function deleteComment(){

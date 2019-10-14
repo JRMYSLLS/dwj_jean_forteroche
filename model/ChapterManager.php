@@ -10,9 +10,9 @@ class ChapterManager extends Manager
   function getChapters()
   {
     $db = $this->dbconnect();
-    $req = $db->prepare('SELECT id,title,content,DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr
+    $req = $db->prepare('SELECT id,title,content,DATE_FORMAT(creation_date, \'%Y/%m/%d\') AS creation_date_fr
                          FROM chapter
-                         ORDER BY creation_date_fr');
+                         ORDER BY creation_date_fr DESC');
     $req->execute(array());
     $results = $req->fetchAll();
     return $results;
@@ -21,7 +21,7 @@ class ChapterManager extends Manager
   function getChapter($id)
   {
     $db = $this->dbconnect();
-    $req = $db->prepare('SELECT id,title,content,DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr
+    $req = $db->prepare('SELECT id,title,content,DATE_FORMAT(creation_date, \'%Y/%m/%d\') AS creation_date_fr
                          FROM chapter
                          WHERE id=?');
     $req->execute(array($id));
@@ -53,7 +53,7 @@ class ChapterManager extends Manager
     $req = $db->prepare('UPDATE chapter
                          SET content=?, title=?
                          WHERE id=?');
-   $result = $req->execute(array($id,$content,$title));
+   $result = $req->execute(array($content,$title,$id));
 
    return $result;
   }

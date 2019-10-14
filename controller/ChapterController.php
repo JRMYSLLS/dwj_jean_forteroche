@@ -51,13 +51,20 @@ class ChapterController extends Connect
 
   public function editChapter(){
     $chapter = new \forteroche\model\ChapterManager();
+    $flash = new \forteroche\controller\MessageFlash();
     if(isset($_GET['id']) && $_GET['id']>0){
       $id = $_GET['id'];
       $content = html_entity_decode(htmlspecialchars($_POST['content']));
       $title = htmlspecialchars($_POST['title']);
-      $result = $chapter->editChapter($id,$content,$title);
+      if (!empty($content) && !empty($title)) {
+        $result = $chapter->editChapter($id,$content,$title);
+        header('location: index.php');
+      } else {
+        $flash->setFlash('Verifier d\'avoir mis un titre et que le chapitre ne soit pas vide');
+        header('location: index.php?action=editChapterView&id='.$id);
     }
   }
+}
 
   public function deleteChapter(){
     $chapter = new \forteroche\model\ChapterManager();
@@ -65,7 +72,8 @@ class ChapterController extends Connect
     if(isset($_GET['id']) && $_GET['id']>0){
       $id = $_GET['id'];
       $chapter->deleteChapter($id);
-      $comment->deleteComment($id);
+      $comment->deleteCommentInChapter($id);
+      header('location: index.php?action=admin');
     }
 
   }
@@ -73,16 +81,16 @@ class ChapterController extends Connect
   public function newChapter(){
     $isAdmin = $this->isAdmin();
     $chapter = new \forteroche\model\ChapterManager();
+    $flash = new \forteroche\controller\MessageFlash();
     if (isset($_POST['newChapter'])) {
       $title = htmlspecialchars($_POST['title']);
-      $content = html_entity_decode(htmlspecialchars($_POST['content']));
+      $content = $_POST['content'];
       if(!empty($title) OR !empty($content)){
         $chapter->newChapter($title,$content);
         header('location: index.php');
-        echo 'prout';
       }else {
-        throw new \Exception("Verifiez d'avoir écrit un chapitre et qu'il posséde un titre");
-
+        $flash->setFlash('tous les champs doivent etre remplient!!!');
+        header('location: index.php?action=newChapter');
       }
     }
   }
