@@ -26,6 +26,15 @@ class MembersManager extends Manager
     return $result;
   }
 
+  public function isAlreadyUsed($pseudo){
+    $db = $this->dbconnect();
+    $req = $db->prepare('SELECT pseudo FROM members WHERE pseudo=?');
+    $req->execute(array($pseudo));
+    $result = $req->rowCount();
+
+    return $result;
+  }
+
   public function connection($mail){
     $db = $this->dbconnect();
     $req = $db->prepare('SELECT * FROM members WHERE mail=?');
