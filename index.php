@@ -6,12 +6,15 @@ require_once('controller/ChapterController.php');
 require_once('controller/MemberController.php');
 require_once('controller/CommentController.php');
 require_once('controller/AdminController.php');
+require_once('controller/MessageFlash.php');
 
 $action='';
 $membre = new \forteroche\controller\MembersController();
 $chapter = new \forteroche\controller\ChapterController();
 $comment = new \forteroche\controller\CommentController();
 $admin = new \forteroche\controller\AdminController();
+
+
 
 if(isset($_GET['action'])){
   $action = $_GET['action'];
@@ -75,22 +78,33 @@ try {
       $chapter->editListChapter();
       break;
 
-    case 'editChapter':
+    case 'editChapterView':
       $chapter->editChapterView();
+      break;
+
+    case 'editChapter':
+      $chapter->editChapter();
       break;
 
     case 'deleteChapter':
       $chapter->deleteChapter();
+      break;
+
+    case 'allCommentView':
+      $comment->allCommentView();
+      break;
 
     default:
       $chapter->listChapter();
       break;
   }
 } catch (\Exception $e) {
-  require('view/erreur.php');
+ echo 'Erreur : ' . $e->getMessage();
 }
 // mettre antislash pour class native PHP devant
 
 //autoload??
 
 // status si flag dans la BDD
+
+//message flash pour les erreurs corriger Modifier un article modifier liste commentaires trim htmlspecialchars
