@@ -19,13 +19,19 @@ class ChapterController extends Connect
   public function showChapter(){
   $chapter = new \forteroche\model\ChapterManager();
   $comment = new \forteroche\model\CommentManager();
+  $flash = new \forteroche\controller\MessageFlash();
 
   if (isset($_GET['id']) && $_GET['id']>0) {
     $num = $_GET['id'];
     $results = $chapter->getChapter($num);
     $comments = $comment->getComment($num);
+    if ($results['id']==$num) {
+      require('view/ChapterView.php');
+    }else{
+      $flash->setFlash('Ce chapitre n\'existe pas!');
+      header('location: index.php');
+    }
   }
-  require('view/ChapterView.php');
   }
 
   public function newChapterView(){
