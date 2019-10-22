@@ -42,7 +42,7 @@ class ChapterController extends Connect
   public function editListChapter(){
     $isAdmin = $this->isAdmin();
     $chapter = new \forteroche\model\ChapterManager();
-    $results = $chapter->getChapters();
+    $results = $chapter->getChaptersAndComments();
     require('view/backend/editListChapter.php');
   }
 
@@ -79,7 +79,7 @@ class ChapterController extends Connect
       $id = $_GET['id'];
       $chapter->deleteChapter($id);
       $comment->deleteCommentInChapter($id);
-      header('location: index.php?action=admin');
+      header('location: index.php?action=editListChapter');
     }
 
   }

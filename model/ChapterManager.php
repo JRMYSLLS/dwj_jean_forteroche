@@ -12,7 +12,7 @@ class ChapterManager extends Manager
     $db = $this->dbconnect();
     $req = $db->prepare('SELECT id,title,content,DATE_FORMAT(creation_date, \'%Y/%m/%d\') AS creation_date_fr
                          FROM chapter
-                         ORDER BY creation_date_fr DESC');
+                         ORDER BY id DESC');
     $req->execute(array());
     $results = $req->fetchAll();
     return $results;
@@ -26,6 +26,19 @@ class ChapterManager extends Manager
                          WHERE id=?');
     $req->execute(array($id));
     $results = $req->fetch();
+    return $results;
+  }
+
+  function getChaptersAndComments()
+  {
+    $db = $this->dbconnect();
+    $req = $db->prepare('SELECT chapter.id,title,
+      COUNT(comments.id_chapter) as countComs
+      FROM chapter left join comments on chapter.id = comments.id_chapter
+      group by chapter.id
+      ORDER BY id DESC');
+    $req->execute(array());
+    $results = $req->fetchAll();
     return $results;
   }
 
