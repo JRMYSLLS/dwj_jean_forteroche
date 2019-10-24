@@ -1,13 +1,12 @@
 <?php $title = 'admin'; ?>
 
 <?php ob_start(); ?>
-<div class="container-fluid">
+<div class="container-fluid space">
   <div class="row">
     <?php include'admin.php'; ?>
     <div class="col-md-8">
       <form name="newChapter" id="formulaire" action="index.php?action=publishChapter" method="post">
-        <label for="title">Titre</label>
-        <input id ="title" type="text" name="title">
+        <input id ="title" type="text" name="title" placeholder="Titre">
         <textarea id="texte" name="content" ></textarea>
         <input type="submit" name="newChapter" value="publier">
       </form>

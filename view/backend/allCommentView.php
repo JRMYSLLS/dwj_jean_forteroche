@@ -13,11 +13,11 @@
             <td><strong><?=htmlspecialchars($comment['author'])?></strong></td>
             <td><?= $comment['comment']?></td>
             <?php if($comment['status_comment']==0 OR $comment['status_comment']==1){?>
-            <td><a href="index.php?action=validateComment&amp;id=<?=$comment['id']?>&amp;chapter=<?=$comment['id_chapter']?>&amp;return=view">validez</a></td>
+            <td><a href="index.php?action=validateComment&amp;id=<?=$comment['id']?>&amp;chapter=<?=$comment['id_chapter']?>&amp;return=view"><i class="far fa-check-circle"></i> Valider</a></td>
           <?php }else{ ?>
             <td></td>
           <?php } ?>
-            <td><a href="index.php?action=deleteComment&amp;id=<?=$comment['id']?>&amp;chapter=<?=$comment['id_chapter']?>&amp;return=view">supprimez</a></td>
+            <td><a href="index.php?action=deleteComment&amp;id=<?=$comment['id']?>&amp;chapter=<?=$comment['id_chapter']?>&amp;return=view"><i class="fas fa-trash-alt"></i> Supprimer</a></td>
 
           </tr>
           <?php endforeach;?>

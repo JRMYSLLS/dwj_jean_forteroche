@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-  <div class="container">
+  <div class="container space">
     <div class="row">
       <div class="col-md-8">
         <h2><?=htmlspecialchars($results['title'])?></h2>
@@ -15,25 +15,21 @@
     </div>
   </div>
   <div class="container">
-<?php foreach ($comments as $comment):?>
-  <div class="commentaires_custom">
-    <div class="row justify-content-between align-items-center comment_barre">
-      <div class="col-6">
-        <p class="text-left"><?=htmlspecialchars($comment['author'])?></p>
-      </div>
-      <div class="col-6">
-        <p class="text-right"><?php if (isset($_SESSION['pseudo']) && $comment['validate_comment'] == 0) {?>
-          <a href="index.php?action=reportComment&amp;id=<?=$comment['id']?>&amp;chapter<?=$comment['id_chapter']?>">signaler</a>
-        <?php } ?></p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-8">
-        <p><?= $comment['comment']?></p>
-      </div>
-    </div>
-  </div>
-  <?php endforeach;?>
+
+  <table class="table table-striped">
+    <tbody>
+      <?php foreach ($comments as $comment):?>
+      <tr>
+        <td><strong><?=htmlspecialchars($comment['author'])?></strong> <br> <hr><?= $comment['comment']?> </td>
+        <td><?php if (isset($_SESSION['pseudo']) && $comment['status_comment'] == 0) {?>
+          <a href="index.php?action=reportComment&amp;id=<?=$comment['id']?>&amp;chapter=<?=$comment['id_chapter']?>"><p><i class="fas fa-exclamation-triangle"></i>Signaler</p></a>
+        <?php }elseif($comment['status_comment'] == 2){?><i class="far fa-check-circle"></i><?php  } ?></td>
+
+      </tr>
+      <?php endforeach;?>
+    </tbody>
+  </table>
+
   </div>
 <?php
 if (isset($_SESSION['pseudo'])) {?>
@@ -55,8 +51,19 @@ if (isset($_SESSION['pseudo'])) {?>
     </div>
   </div>
 <?php
-}
- ?>
+}else{?>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card my-4">
+          <h5 class="card-header">Pour laisser un commentaire veuillez vous <a href="index.php?action=login" class="lien">inscrire</a> et/ou vous <a href="index.php?action=login" class="lien">connecter</a>.</h5>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<p></p>
+<?php }?>
 
 <?php $content =ob_get_clean(); ?>
 <?php require('view/template.php') ?>

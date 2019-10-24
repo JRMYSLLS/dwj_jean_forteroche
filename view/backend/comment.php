@@ -6,13 +6,13 @@
     <?php include'admin.php'; ?>
     <div class="col-md-8">
       <p class="alert-danger">Commentaire(s) signalé(s)</p>
-      <table class="table table-striped table-dark">
+      <table class="table table-striped">
         <tbody>
           <?php foreach ($results as $result):?>
           <tr>
-            <td><?=htmlspecialchars($result['comment'])?></td>
-            <td><a href="index.php?action=validateComment&amp;id=<?=$result['id']?>">validez</a></td>
-            <td><a href="index.php?action=deleteComment&amp;id=<?=$result['id']?>">supprimez</a></td>
+            <td><?=$result['comment']?></td>
+            <td><a href="index.php?action=validateComment&amp;id=<?=$result['id']?>"><i class="far fa-check-circle"></i> Validez</a></td>
+            <td><a href="index.php?action=deleteComment&amp;id=<?=$result['id']?>"><i class="fas fa-trash-alt"></i> Supprimez</a></td>
           </tr>
           <?php endforeach;?>
         </tbody>
