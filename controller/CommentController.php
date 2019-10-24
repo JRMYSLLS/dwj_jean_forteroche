@@ -4,6 +4,7 @@ namespace forteroche\controller;
 use \forteroche\model\CommentManager;
 require_once('model/CommentManager.php');
 require_once('controller/ConnectionControlleur.php');
+require_once('controller/MessageFlash.php');
 
 /**
  *
@@ -59,9 +60,11 @@ class CommentController extends Connect
 
   public function deleteComment(){
     $delete = new CommentManager();
+    $flash = new \forteroche\controller\MessageFlash();
     if(isset($_GET['id'])){
       $delete->deleteComment($_GET['id']);
       if (isset($_GET['return'])) {
+        $flash->setFlash('Commentaire supprimé','success');
         header('Location: index.php?action=allCommentView&id='.$_GET['chapter']);
       }else{
         header('Location: index.php?action=admin');

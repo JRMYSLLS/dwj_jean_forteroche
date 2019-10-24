@@ -2,7 +2,7 @@
 
 namespace forteroche\controller;
 use \forteroche\model\MembersManager;
-require_once('model/membersManager.php');
+require_once('./model/MembersManager.php');
 require_once('controller/MessageFlash.php');
 
 /**
@@ -32,7 +32,8 @@ class MembersController
             $verifPseudo = $newMember->isAlreadyUsed($pseudo);
             if($verifPseudo == 0){
               $result = $newMember->registration($pseudo,$mail,$password);
-              header('location: index.php');
+              $flash->setFlash('Votre compte vient d\'étre créé','success');
+              header('location: index.php?action=login');
             }
             else{
               $flash->setFlash('Ce pseudo est déjà utilisé!');
@@ -51,7 +52,7 @@ class MembersController
         }
       }
       else {
-        $flash->setFlash('Veuillez remplir tout les champs');
+        $flash->setFlash('Tout les champs sont obligatoires !');
         header('location: index.php?action=login');
       }
     }
@@ -70,9 +71,11 @@ class MembersController
         if($passwordMatch){
           $_SESSION['pseudo'] = $verify['pseudo'];
           $_SESSION['id'] = $verify['id'];
+          $flash->setFlash('Vous etes connecté','success');
+          header('location: index.php');
           if($verify['is_admin']==0){
             $_SESSION['admin'] = true;
-            $flash->setFlash('Bienvenue Mr FORTEROCHE');
+            $flash->setFlash('Bonjour Mr Forteroche','success');
             header('Location: index.php?action=admin');
           }
           else{
@@ -81,12 +84,12 @@ class MembersController
           }
         }
         else{
-          $flash->setFlash('mauvais mail ou mot de passe!!!');
+          $flash->setFlash('Mauvais mail ou mot de passe!!!');
           header('location: index.php?action=login');
         }
       }
       else {
-        $flash->setFlash('tous les champs doivent etre remplient!!!');
+        $flash->setFlash('Tout les champs sont obligatoires !');
         header('location: index.php?action=login');
 
       }

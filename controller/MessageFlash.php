@@ -4,16 +4,19 @@ namespace forteroche\controller;
 class MessageFlash
 {
 
-  public static function setFlash($message) {
-      $_SESSION['flash'] = $message;
+  public static function setFlash($message, $type ='danger') {
+      $_SESSION['flash'] = array(
+        'message' => $message,
+        'type'    =>$type
+      );
   }
 
   public static function getFlash() {
     if (isset($_SESSION['flash']) ) {
-      echo '<div id="alert" class="alert alert-danger">
+      echo '<div id="alert" class="alert alert-'. $_SESSION['flash']['type'] .'">
             <a class="close"> x </a>
             <p class="txt">'
-            . $_SESSION['flash'] .
+            . $_SESSION['flash']['message'] .
             '</p>
             </div>';
       unset($_SESSION['flash']);

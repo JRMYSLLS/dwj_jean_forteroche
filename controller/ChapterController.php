@@ -64,9 +64,10 @@ class ChapterController extends Connect
       $title = htmlspecialchars($_POST['title']);
       if (!empty($content) && !empty($title)) {
         $result = $chapter->editChapter($id,$content,$title);
-        header('location: index.php');
+        $flash->setFlash('Chapitre modifié','success');
+        header('location: index.php?action=editListChapter');
       } else {
-        $flash->setFlash('Verifier d\'avoir mis un titre et que le chapitre ne soit pas vide');
+        $flash->setFlash('Tout les champs sont obligatoire !');
         header('location: index.php?action=editChapterView&id='.$id);
     }
   }
@@ -75,10 +76,12 @@ class ChapterController extends Connect
   public function deleteChapter(){
     $chapter = new \forteroche\model\ChapterManager();
     $comment = new \forteroche\model\CommentManager();
+    $flash = new \forteroche\controller\MessageFlash();
     if(isset($_GET['id']) && $_GET['id']>0){
       $id = $_GET['id'];
       $chapter->deleteChapter($id);
       $comment->deleteCommentInChapter($id);
+      $flash->setFlash('Chapitre supprimé','success');
       header('location: index.php?action=editListChapter');
     }
 
@@ -93,9 +96,10 @@ class ChapterController extends Connect
       $content = $_POST['content'];
       if(!empty($title) OR !empty($content)){
         $chapter->newChapter($title,$content);
-        header('location: index.php');
+        $flash->setFlash('Nouveau chapitre publié','success');
+        header('location: index.php?action=editListChapter');
       }else {
-        $flash->setFlash('tous les champs doivent etre remplient!!!');
+        $flash->setFlash('Tout les champs sont obligatoire !');
         header('location: index.php?action=newChapter');
       }
     }
