@@ -5,7 +5,11 @@
   <div class="row">
     <?php include'admin.php'; ?>
     <div class="col-md-8">
-      <p class="alert-danger">Commentaire(s) signalé(s)</p>
+      <?php if($verif['verify']>0){?>
+        <p class="alert-danger">Commentaire(s) signalé(s)</p>
+    <?php  }else{?>
+      <p class="alert-success">Vous n'avez pas de commentaire signalé</p>
+    <?php  }?>
       <table class="table table-striped">
         <tbody>
           <?php foreach ($results as $result):?>

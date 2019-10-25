@@ -48,6 +48,19 @@
     return $comments;
    }
 
+   public function isThereReportComment(){
+     $db = $this->dbconnect();
+     $req = $db->prepare('SELECT
+                          COUNT(*) AS verify
+                          FROM comments
+                          WHERE status_comment = 1 ');
+    $req->execute(array());
+    $comments = $req->fetch();
+
+    return $comments;
+
+   }
+
    public function deleteComment($id){
      $db = $this->dbconnect();
      $req = $db->prepare('DELETE FROM comments where id=?');

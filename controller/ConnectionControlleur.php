@@ -1,6 +1,6 @@
 <?php
 namespace forteroche\controller;
-
+require_once('controller/MessageFlash.php');
 
 class Connect
 {
@@ -19,7 +19,6 @@ class Connect
 
   }else{
     throw new \Exception("Cette page est reserver à Mr Forteroche :)");
-
     }
   }
 }

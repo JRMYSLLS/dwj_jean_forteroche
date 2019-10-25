@@ -12,6 +12,7 @@ class AdminController extends Connect
     $isAdmin = $this->isAdmin();
     $comment= new \forteroche\model\CommentManager();
     $results = $comment->getReportComment();
+    $verif = $comment->isThereReportComment();
     require('view/backend/comment.php');
   }
 
