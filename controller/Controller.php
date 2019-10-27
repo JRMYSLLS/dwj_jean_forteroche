@@ -1,8 +1,21 @@
 <?php
 namespace forteroche\controller;
 
-class MessageFlash
+class Controller
 {
+
+
+  public function isConnect(){
+    if (!isset($_SESSION['pseudo'])) {
+      throw new \Exception("Vous devez étre connecté pour avoir accès à cette page");
+    }
+  }
+
+  public function isAdmin(){
+    if(!isset($_SESSION['admin'])){
+      throw new \Exception("Cette page est reservé à Mr Forteroche :)");
+    }
+  }
 
   public static function setFlash($message, $type ='danger') {
       $_SESSION['flash'] = array(
@@ -23,10 +36,4 @@ class MessageFlash
     }
 
   }
-
 }
-
-/*elseif ( isset($_SESSION['successMsg']) ) {
-  echo '<div class="alert alert-success" role="alert"><strong>'. $_SESSION['successMsg'] . '</strong></div>';
-  unset($_SESSION['successMsg']);
-}*/

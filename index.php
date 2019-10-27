@@ -6,14 +6,11 @@ session_start();
 require_once('controller/ChapterController.php');
 require_once('controller/MemberController.php');
 require_once('controller/CommentController.php');
-require_once('controller/AdminController.php');
-require_once('controller/MessageFlash.php');
 
 $action='';
 $membre = new \forteroche\controller\MembersController();
 $chapter = new \forteroche\controller\ChapterController();
 $comment = new \forteroche\controller\CommentController();
-$admin = new \forteroche\controller\AdminController();
 
 
 
@@ -52,7 +49,7 @@ try {
       break;
 
     case 'admin':
-      $admin->adminPage();
+      $comment->adminPage();
       break;
 
     case 'reportComment':

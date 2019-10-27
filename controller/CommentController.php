@@ -3,27 +3,27 @@
 namespace forteroche\controller;
 use \forteroche\model\CommentManager;
 require_once('model/CommentManager.php');
-require_once('controller/ConnectionControlleur.php');
-require_once('controller/MessageFlash.php');
+require_once('controller/Controller.php');
 
 /**
  *
  */
-class CommentController extends Connect
+class CommentController extends Controller
 {
   public function postComment(){
     $chapter = new CommentManager();
-    $flash = new \forteroche\controller\MessageFlash();
+
     if(isset($_POST['commentPost'])){
       $id_chapter = htmlspecialchars($_GET['id']);
       $author = $_SESSION['pseudo'];
       $comment = htmlspecialchars($_POST['comment']);
+
       if (!empty($comment)) {
         $chapter->postComment($id_chapter,$author,$comment);
         header('Location: index.php?action=viewChapter&id='.$id_chapter);
       }
       else {
-        $flash->setFlash('votre commentaire est vide');
+        $this->setFlash('votre commentaire est vide');
         header('Location: index.php?action=viewChapter&id='.$_GET['id']);
       }
     }
@@ -60,11 +60,12 @@ class CommentController extends Connect
 
   public function deleteComment(){
     $delete = new CommentManager();
-    $flash = new \forteroche\controller\MessageFlash();
     if(isset($_GET['id'])){
+
       $delete->deleteComment($_GET['id']);
+
       if (isset($_GET['return'])) {
-        $flash->setFlash('Commentaire supprimé','success');
+        $this->setFlash('Commentaire supprimé','success');
         header('Location: index.php?action=allCommentView&id='.$_GET['chapter']);
       }else{
         header('Location: index.php?action=admin');
@@ -74,13 +75,23 @@ class CommentController extends Connect
 
   public function validateComment(){
     $validate = new CommentManager();
+
     if(isset($_GET['id'])){
       $validate->validateComment($_GET['id']);
+
       if (isset($_GET['return'])) {
         header('Location: index.php?action=allCommentView&id='.$_GET['chapter']);
       }else{
         header('Location: index.php?action=admin');
       }
     }
+  }
+
+  public function adminPage(){
+    $isAdmin = $this->isAdmin();
+    $comment= new CommentManager();
+    $results = $comment->getReportComment();
+    $verif = $comment->isThereReportComment();
+    require('view/backend/comment.php');
   }
 }
