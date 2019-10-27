@@ -16,7 +16,7 @@
           <tr>
             <td><?=$result['comment']?></td>
             <td><a href="index.php?action=validateComment&amp;id=<?=$result['id']?>"><i class="far fa-check-circle"></i> Validez</a></td>
-            <td><a href="index.php?action=deleteComment&amp;id=<?=$result['id']?>"><i class="fas fa-trash-alt"></i> Supprimez</a></td>
+            <td><a href="index.php?action=deleteComment&amp;id=<?=$result['id']?>" class="delete"><i class="fas fa-trash-alt"></i> Supprimez</a></td>
           </tr>
           <?php endforeach;?>
         </tbody>

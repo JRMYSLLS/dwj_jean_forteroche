@@ -19,7 +19,7 @@
               <a href="index.php?action=allCommentView&amp;id=<?=$result['id']?>">Voir les commentaires (<?=$result['countComs']?>)</a>
               <?php }?></td>
             <td><a href="index.php?action=editChapterView&amp;id=<?=$result['id']?>"><i class="fas fa-edit"></i> Modifier</a></td>
-            <td><a href="index.php?action=deleteChapter&amp;id=<?=$result['id']?>"><i class="fas fa-trash-alt"></i> Supprimer</a></td>
+            <td><a href="index.php?action=deleteChapter&amp;id=<?=$result['id']?>" class="delete"><i class="fas fa-trash-alt"></i> Supprimer</a></td>
           </tr>
           <?php endforeach;?>
         </tbody>

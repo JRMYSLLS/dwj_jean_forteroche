@@ -17,7 +17,7 @@
           <?php }else{ ?>
             <td></td>
           <?php } ?>
-            <td><a href="index.php?action=deleteComment&amp;id=<?=$comment['id']?>&amp;chapter=<?=$comment['id_chapter']?>&amp;return=view"><i class="fas fa-trash-alt"></i> Supprimer</a></td>
+            <td><a href="index.php?action=deleteComment&amp;id=<?=$comment['id']?>&amp;chapter=<?=$comment['id_chapter']?>&amp;return=view" class="delete"><i class="fas fa-trash-alt"></i> Supprimer</a></td>
 
           </tr>
           <?php endforeach;?>

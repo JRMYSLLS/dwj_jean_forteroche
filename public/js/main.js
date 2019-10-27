@@ -23,3 +23,13 @@ $(function() {
         }
     });
 });
+
+$(function() {
+  $(".delete").click(function(){
+      if(confirm("Souhaitez vous valider la suppression")) {
+          return true;
+      } else {
+          return false; 
+      }
+  });
+});
